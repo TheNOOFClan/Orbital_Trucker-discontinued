@@ -1,0 +1,8 @@
+/bin/
+.classpath
+.project
+org.eclipse.*
+*.wav
+*.mp3
+*.png
+*.bmp
