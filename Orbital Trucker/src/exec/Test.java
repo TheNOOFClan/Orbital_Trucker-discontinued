@@ -9,7 +9,7 @@ import obj.Ship;
 public class Test
 {
 
-    private int scale = 2;
+    private int scale = 1;
 
     private Ship ship;
 

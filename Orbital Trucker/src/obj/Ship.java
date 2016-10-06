@@ -12,7 +12,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class Ship
 {
-    private static final int MAX_MOVE_TIMEOUT = 10;
+    private static final int MAX_MOVE_TIMEOUT = 0;
     private static final int MAX_TURN_TIMEOUT = 30;
 
     private Texture[] textures = new Texture[8];
