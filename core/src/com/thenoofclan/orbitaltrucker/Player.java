@@ -47,7 +47,7 @@ public class Player extends Ship
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.W))
 		{
-			this.tmpVec.set(20 * Gdx.graphics.getDeltaTime(), 20 * Gdx.graphics.getDeltaTime());
+			this.tmpVec.set(10 * Gdx.graphics.getDeltaTime(), 10 * Gdx.graphics.getDeltaTime());
 			this.tmpVec.setAngle(this.rot + 90);
 			this.vec.add(this.tmpVec);
 		}

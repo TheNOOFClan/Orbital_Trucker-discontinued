@@ -6,11 +6,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 
 public class MainMenuScreen implements Screen
 {
 	final OrbitalTrucker game;
 	Music mainMusic;
+	Texture title;
 
 	public MainMenuScreen(final OrbitalTrucker gam)
 	{
@@ -19,6 +21,7 @@ public class MainMenuScreen implements Screen
 		mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Song1.mp3"));
 		mainMusic.setLooping(true);
 		mainMusic.play();
+		title = new Texture(Gdx.files.internal("placeholdertitle.png"));
 	}
 
 	@Override
@@ -33,7 +36,7 @@ public class MainMenuScreen implements Screen
 		game.batch.setProjectionMatrix(game.camera.combined);
 
 		game.batch.begin();
-		game.font.draw(game.batch, "Space Trucker", 0, 144);
+		game.batch.draw(title, 0, 97, 160, 48);
 		game.batch.end();
 
 		if (Gdx.input.isTouched())
@@ -66,6 +69,7 @@ public class MainMenuScreen implements Screen
 	@Override
 	public void dispose()
 	{
+		title.dispose();
 		mainMusic.dispose();
 	}
 }
