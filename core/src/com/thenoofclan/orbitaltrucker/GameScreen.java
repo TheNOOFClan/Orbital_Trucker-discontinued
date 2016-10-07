@@ -17,6 +17,7 @@ public class GameScreen implements Screen
 {
 	final OrbitalTrucker game;
 	Texture truckT;
+	Texture truckT45;
 	Music battleMusic;
 	Player truck;
 	Random rng;
@@ -36,11 +37,12 @@ public class GameScreen implements Screen
 	{
 		this.game = game;
 		truckT = new Texture(Gdx.files.internal("truck0.png"));
+		truckT45 = new Texture(Gdx.files.internal("truck45.png"));
 		battleMusic = Gdx.audio.newMusic(Gdx.files.internal("space_brawl.mp3"));
 		battleMusic.setLooping(true);
 		rng = new Random();
 
-		truck = new Player(truckT, 16, 16, 0, 0, 0);
+		truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0);
 
 		bIntro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Intro.mp3"));
 		bOutro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Outro.mp3"));
@@ -77,7 +79,7 @@ public class GameScreen implements Screen
 	{
 		if (!musicArray[musicNum].isPlaying() && !stopMusic)
 		{
-			musicNum = rng.nextInt(musicArray.length - 2);
+			musicNum = rng.nextInt(musicArray.length - 1);
 			if (musicNum == 4)
 			{
 				stopMusic = true;
@@ -115,22 +117,26 @@ public class GameScreen implements Screen
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize(int width, int height)
+	{
 
 	}
 
 	@Override
-	public void pause() {
+	public void pause()
+	{
 
 	}
 
 	@Override
-	public void resume() {
+	public void resume()
+	{
 
 	}
 
 	@Override
-	public void hide() {
+	public void hide()
+	{
 
 	}
 

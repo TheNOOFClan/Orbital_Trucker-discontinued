@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Ship
 {
 	public Texture texture;
+	public Texture texture45;
 	public Sprite sprite;
 	//private Rectangle rectangle;
 	public Sound engine;
@@ -26,9 +27,10 @@ public class Ship
 	public int hp;
 
 
-	public Ship(Texture texture, int width, int height, int x, int y, float rot)
+	public Ship(Texture texture, Texture texture45, int width, int height, int x, int y, float rot)
 	{
 		this.texture = texture;
+		this.texture45 = texture45;
 		this.width = width;
 		this.height = height;
 		this.x = x;
@@ -49,6 +51,7 @@ public class Ship
 	public Ship()
 	{
 		this.texture = null;
+		this.texture45 = null;
 		this.width = 16;
 		this.height = 16;
 		this.x = 0;
