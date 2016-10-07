@@ -18,16 +18,22 @@ public class Ship
 
     public int width;
     public int height;
-    public int x;
-    public int y;
-    public float rot;
-    public int dir;
+    public float x;
+    public float y;
+    public int rot;
     public Vector2 velocity;
     public Vector2 acceleration;
 
+    public int maxTurnTimeout;
+    public int turnTimeout;
+
+    public float maxVelocity;
+    public float maxAccel;
+    public float brakeRate;
+
     public int hp;
 
-    public Ship(Texture texture, Texture texture45, int width, int height, int x, int y, int dir)
+    public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate)
     {
         this.texture = texture;
         this.texture45 = texture45;
@@ -36,13 +42,19 @@ public class Ship
         this.x = x;
         this.y = y;
         this.hp = 100;
-        this.dir = dir;
-        this.rot = 45 * dir;
+        this.rot = rot;
         this.engine = null;
         this.die = null;
         this.talk = null;
         this.velocity = new Vector2(0, 0);
         this.acceleration = new Vector2(this.velocity);
+
+        this.maxTurnTimeout = turnTimeout;
+        this.turnTimeout = 0;
+
+        this.maxVelocity = maxVelocity;
+        this.maxAccel = maxAccel;
+        this.brakeRate = brakeRate;
 
         this.sprite = new Sprite(texture, width, height);
         this.sprite.setPosition(x, y);
@@ -90,9 +102,9 @@ public class Ship
 
     public void update()
     {
-        this.x += ((int) this.velocity.x);
-        this.y += ((int) this.velocity.y);
-        this.sprite.setPosition(this.x, this.y);
+        this.x += (this.velocity.x);
+        this.y += (this.velocity.y);
+        this.sprite.setPosition((int)this.x, (int)this.y);
 
         if (this.hp >= 0)
         {

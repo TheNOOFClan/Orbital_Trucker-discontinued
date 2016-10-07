@@ -41,7 +41,7 @@ public class GameScreen implements Screen
         battleMusic.setLooping(true);
         rng = new Random();
 
-        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0);
+        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1);
 
         bIntro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Intro.mp3"));
         bOutro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Outro.mp3"));

@@ -9,85 +9,57 @@ public class Player extends Ship
 {
     private Texture spriteTexture;
 
-    public Player(Texture texture, Texture texture45, int width, int height, int x, int y, int dir)
+    public Player(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate)
     {
-        this.texture = texture;
-        this.texture45 = texture45;
-        this.width = width;
-        this.height = height;
-        this.x = x;
-        this.y = y;
-        this.hp = 100;
-        this.dir = dir;
-        this.rot = 45 * dir;
-
-        this.sprite = new Sprite(texture, width, height);
-        this.sprite.setPosition(x, y);
-        this.sprite.setRotation(rot);
-
-        this.spriteTexture = texture;
+        super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate);
     }
 
     @Override
     public void update()
     {
         super.update();
-        if (this.dir % 2 == 0)
+        if (this.rot % 90 == 0)
         {
             if (this.spriteTexture != this.texture)
             {
                 this.sprite.setTexture(this.texture);
                 this.spriteTexture = this.texture;
             }
-            if (this.dir == 0)
-            {
-                this.sprite.setRotation(0);
-            } else if (this.dir == 2)
-            {
-                this.sprite.setRotation(90);
-            } else if (this.dir == 4)
-            {
-                this.sprite.setRotation(180);
-            } else if (this.dir == 6)
-            {
-                this.sprite.setRotation(270);
-            }
-        } else
+        }
+        else
         {
             if (this.spriteTexture != this.texture45)
             {
                 this.sprite.setTexture(this.texture45);
                 this.spriteTexture = this.texture45;
             }
-            if (this.dir == 1)
-            {
-                this.sprite.setRotation(0);
-            } else if (this.dir == 3)
-            {
-                this.sprite.setRotation(90);
-            } else if (this.dir == 5)
-            {
-                this.sprite.setRotation(180);
-            } else if (this.dir == 7)
-            {
-                this.sprite.setRotation(270);
-            }
         }
+        this.sprite.setRotation((rot - (rot % 90)));
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && this.turnTimeout == 0)
         {
-            this.dir = (dir + 7) % 8;
+            this.rot = (rot + 315) % 360;
+            this.turnTimeout = maxTurnTimeout;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
+        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && this.turnTimeout == 0)
         {
-            this.dir = (dir + 1) % 8;
+            this.rot = (rot + 45) % 360;
+            this.turnTimeout = maxTurnTimeout;
         }
-        this.rot = dir * 45;
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
         {
-            this.acceleration.set(10 * Gdx.graphics.getDeltaTime(), 10 * Gdx.graphics.getDeltaTime());
+            this.acceleration.set(maxAccel * Gdx.graphics.getDeltaTime(), maxAccel * Gdx.graphics.getDeltaTime());
             this.acceleration.setAngle(this.rot);
             this.velocity.add(this.acceleration);
+            if (velocity.len() > this.maxVelocity)
+                velocity.setLength(maxVelocity);
         }
+        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+        {
+            // activate SPACE BRAKES
+        }
+
+        if (this.turnTimeout > 0)
+            turnTimeout--;
     }
 }
