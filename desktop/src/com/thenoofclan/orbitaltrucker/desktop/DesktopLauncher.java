@@ -2,7 +2,7 @@ package com.thenoofclan.orbitaltrucker.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.thenoofclan.orbitaltrucker.OrbitalTrucker;
+import com.github.thenoofclan.orbitaltrucker.OrbitalTrucker;
 
 public class DesktopLauncher
 {

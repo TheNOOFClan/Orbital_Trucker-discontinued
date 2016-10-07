@@ -1,4 +1,4 @@
-package com.thenoofclan.orbitaltrucker;
+package com.github.thenoofclan.orbitaltrucker;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
