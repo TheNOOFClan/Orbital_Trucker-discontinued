@@ -15,6 +15,8 @@ public class OrbitalTrucker extends Game
 	public SpriteBatch batch;
 	public BitmapFont font;
 	public OrthographicCamera camera;
+	public boolean fight;
+	public boolean end;
 	
 	@Override
 	public void create ()
