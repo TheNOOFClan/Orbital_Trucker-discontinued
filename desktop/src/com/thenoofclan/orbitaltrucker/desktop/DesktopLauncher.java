@@ -13,7 +13,7 @@ public class DesktopLauncher
         config.foregroundFPS = 60;
         config.width = 160 * 4;
         config.height = 144 * 4;
-        config.title = "Orbital_Trucker|libGDX";
+        config.title = "Orbital_Trucker|GBJam 5";
         new LwjglApplication(new OrbitalTrucker(), config);
     }
 }
