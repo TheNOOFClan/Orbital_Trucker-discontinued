@@ -3,6 +3,7 @@ package com.github.thenoofclan.orbitaltrucker;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -57,7 +58,7 @@ public class Ship
         this.brakeRate = brakeRate;
 
         this.sprite = new Sprite(texture, width, height);
-        this.sprite.setPosition(x, y);
+        this.sprite.setCenter(x, y);
         this.sprite.setRotation(rot);
     }
 
@@ -100,11 +101,21 @@ public class Ship
     // this.dispose();
     // }
 
+    public void render(SpriteBatch batch)
+    {
+        sprite.draw(batch);
+    }
+
     public void update()
     {
         this.x += (this.velocity.x);
         this.y += (this.velocity.y);
-        this.sprite.setPosition((int)this.x, (int)this.y);
+        this.sprite.setCenter((int) this.x, (int) this.y);
+
+        if (velocity.len() > this.maxVelocity)
+            velocity.setLength(maxVelocity);
+        this.velocity.add(this.acceleration);
+        this.acceleration.set(0, 0);
 
         if (this.hp >= 0)
         {

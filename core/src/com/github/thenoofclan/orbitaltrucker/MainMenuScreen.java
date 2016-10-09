@@ -14,9 +14,13 @@ public class MainMenuScreen implements Screen
     Music mainMusic;
     Texture title;
 
+    Text instruct;
+
     public MainMenuScreen(final OrbitalTrucker gam)
     {
         game = gam;
+
+        instruct = new Text(80 - 32, 16, "PRESS Z", OrbitalTrucker.GREEN);
 
         mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Song1.mp3"));
         mainMusic.setLooping(true);
@@ -38,6 +42,7 @@ public class MainMenuScreen implements Screen
 
         game.batch.begin();
         game.batch.draw(title, 0, 97, 160, 48);
+        instruct.render(game.batch);
         game.batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z))

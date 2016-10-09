@@ -17,7 +17,6 @@ public class Player extends Ship
     @Override
     public void update()
     {
-        super.update();
         if (this.rot % 90 == 0)
         {
             if (this.spriteTexture != this.texture)
@@ -50,14 +49,17 @@ public class Player extends Ship
         {
             this.acceleration.set(maxAccel * Gdx.graphics.getDeltaTime(), maxAccel * Gdx.graphics.getDeltaTime());
             this.acceleration.setAngle(this.rot);
-            this.velocity.add(this.acceleration);
-            if (velocity.len() > this.maxVelocity)
-                velocity.setLength(maxVelocity);
         }
         else if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
         {
             // activate SPACE BRAKES
         }
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.Z))
+        {
+            // activate F.S.A.T.
+        }
+
+        super.update();
 
         if (this.turnTimeout > 0)
             turnTimeout--;

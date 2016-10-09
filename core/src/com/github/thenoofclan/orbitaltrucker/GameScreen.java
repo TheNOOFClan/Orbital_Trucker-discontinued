@@ -30,6 +30,10 @@ public class GameScreen implements Screen
     Music[] musicArray;
     int musicNum = 5;
 
+    StarSystem sys;
+
+    HUD hud;
+
     boolean stopMusic = false;
 
     public GameScreen(final OrbitalTrucker game)
@@ -42,6 +46,9 @@ public class GameScreen implements Screen
         rng = new Random();
 
         truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1);
+        Star star = new Star(new Texture(Gdx.files.internal("star.png")), 96, 96);
+        sys = new StarSystem(256, 256, star);
+        sys.player = truck;
 
         bIntro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Intro.mp3"));
         bOutro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Outro.mp3"));
@@ -51,6 +58,7 @@ public class GameScreen implements Screen
         bU2 = Gdx.audio.newMusic(Gdx.files.internal("SF_Upbeat_Midsection_2.mp3"));
 
         musicArray = new Music[] { bD, bD2, bU, bU2, bOutro, bIntro };
+        // Text.init("font/");
     }
 
     // private boolean musicPlaying()
@@ -86,15 +94,11 @@ public class GameScreen implements Screen
             musicArray[musicNum].play();
         }
 
-        game.camera.update();
-
-        game.batch.setProjectionMatrix(game.camera.combined);
-
-        game.batch.begin();
-        truck.sprite.draw(game.batch);
+        sys.render(game.batch, game.camera);
+        // hud.render();
         game.batch.end();
 
-        truck.update();
+        sys.update();
 
         // if (Gdx.input.isKeyPressed(Input.Keys.A))
         // {
