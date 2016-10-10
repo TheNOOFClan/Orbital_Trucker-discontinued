@@ -13,7 +13,7 @@ public class StarSystem
     public Dockable center;
     public Player player;
     public ArrayList<Dockable> dockables;
-    public ArrayList<Ship> ships;
+    // public ArrayList<PirateShip> ships;
     public ArrayList<Laser> lasers;
 
     public StarSystem(int width, int height, Dockable center)
@@ -21,18 +21,18 @@ public class StarSystem
         center.sprite.setCenter(width / 2, height / 2);
         this.center = center;
         dockables = new ArrayList<Dockable>();
-        ships = new ArrayList<Ship>();
+        // ships = new ArrayList<PirateShip>();
         lasers = new ArrayList<Laser>();
         this.width = width;
         this.height = height;
     }
 
-    public void add(Ship ship, int x, int y)
+    public void add(PirateShip ship, int x, int y)
     {
         ship.x = x;
         ship.y = y;
         ship.sprite.setCenter(x, y);
-        ships.add(ship);
+        // ships.add(ship);
     }
 
     public void add(Dockable target, int x, int y)
@@ -42,10 +42,14 @@ public class StarSystem
 
     public void update()
     {
+        if (player.x <= 0 || player.x >= width || player.y <= 0 || player.y >= height)
+            player.edge = true;
+        else
+            player.edge = false;
         center.update();
         player.update();
-        for (Ship s : ships)
-            s.update();
+        // for (PirateShip s : ships)
+        // s.update(player);
         for (Laser l : lasers)
             l.update();
         for (Dockable d : dockables)
@@ -81,9 +85,9 @@ public class StarSystem
         {
             d.render(batch);
         }
-        for (Ship s : ships)
-        {
-            s.render(batch);
-        }
+        // for (Ship s : ships)
+        // {
+        // s.render(batch);
+        // }
     }
 }

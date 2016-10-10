@@ -17,6 +17,8 @@ public class GameScreen implements Screen
     final OrbitalTrucker game;
     Texture truckT;
     Texture truckT45;
+    Texture pirateT;
+    Texture pirateT45;
     Music battleMusic;
     Player truck;
     Random rng;
@@ -45,10 +47,22 @@ public class GameScreen implements Screen
         battleMusic.setLooping(true);
         rng = new Random();
 
-        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1);
+        pirateT = new Texture(Gdx.files.internal("pirate.png"));
+        pirateT45 = new Texture(Gdx.files.internal("pirate45.png"));
+        // PirateShip pirate1 = new PirateShip(pirateT, pirateT45, 16, 16, 256,
+        // 256, 225, 10, 5, 2, 1, 156, 128, 32);
+        // PirateShip pirate2 = new PirateShip(pirateT, pirateT45, 16, 16, 256,
+        // 0, 180, 10, 5, 2, 1, 156, 128, 32);
+        // PirateShip pirate3 = new PirateShip(pirateT, pirateT45, 16, 16, 0,
+        // 256, 270, 10, 5, 2, 1, 156, 128, 32);
+
+        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 0.25f, 10);
         Star star = new Star(new Texture(Gdx.files.internal("star.png")), 96, 96);
         sys = new StarSystem(256, 256, star);
         sys.player = truck;
+        // sys.add(pirate1, 256, 256);
+        // sys.add(pirate2, 256, 0);
+        // sys.add(pirate3, 0, 256);
 
         bIntro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Intro.mp3"));
         bOutro = Gdx.audio.newMusic(Gdx.files.internal("SF_Battle_Outro.mp3"));
@@ -84,6 +98,7 @@ public class GameScreen implements Screen
     @Override
     public void render(float delta)
     {
+
         if (!musicArray[musicNum].isPlaying() && !stopMusic)
         {
             musicNum = rng.nextInt(musicArray.length - 1);
