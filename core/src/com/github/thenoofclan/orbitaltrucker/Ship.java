@@ -17,6 +17,8 @@ public class Ship
     public Sound die;
     public Sound talk;
 
+    private Texture spriteTexture;
+
     public int width;
     public int height;
     public float x;
@@ -31,13 +33,18 @@ public class Ship
     public float maxVelocity;
     public float maxAccel;
     public float brakeRate;
+    public float maxWarp;
 
     public Object[] inventory;
 
     public int hp;
 
+<<<<<<< HEAD
     public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout,
                 float maxVelocity, float maxAccel, float brakeRate, Object[] inventory)
+=======
+    public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float maxWarp)
+>>>>>>> origin/libGDX
     {
         this.texture = texture;
         this.texture45 = texture45;
@@ -60,6 +67,7 @@ public class Ship
         this.maxVelocity = maxVelocity;
         this.maxAccel = maxAccel;
         this.brakeRate = brakeRate;
+        this.maxWarp = maxWarp;
 
         this.sprite = new Sprite(texture, width, height);
         this.sprite.setCenter(x, y);
@@ -112,6 +120,24 @@ public class Ship
 
     public void update()
     {
+        if (this.rot % 90 == 0)
+        {
+            if (this.spriteTexture != this.texture)
+            {
+                this.sprite.setTexture(this.texture);
+                this.spriteTexture = this.texture;
+            }
+        }
+        else
+        {
+            if (this.spriteTexture != this.texture45)
+            {
+                this.sprite.setTexture(this.texture45);
+                this.spriteTexture = this.texture45;
+            }
+        }
+
+        this.sprite.setRotation((rot - (rot % 90)));
         this.x += (this.velocity.x);
         this.y += (this.velocity.y);
         this.sprite.setCenter((int) this.x, (int) this.y);
@@ -121,9 +147,28 @@ public class Ship
         this.velocity.add(this.acceleration);
         this.acceleration.set(0, 0);
 
+        if (this.turnTimeout > 0)
+            turnTimeout--;
+
         if (this.hp >= 0)
         {
             // this.die();
         }
+    }
+
+    public float distTo(Ship s)
+    {
+        return (float) Math.sqrt(Math.pow(s.x - x, 2) + Math.pow(s.y - y, 2));
+    }
+
+    public float angleTo(Ship s)
+    {
+        float ans = (float) Math.atan((s.y - y) / (s.x - x));
+        ans = ans * 180 / (float) Math.PI;
+        if (s.x - x < 0)
+            ans += 180;
+        else if (ans < 0)
+            ans += 360;
+        return ans;
     }
 }
