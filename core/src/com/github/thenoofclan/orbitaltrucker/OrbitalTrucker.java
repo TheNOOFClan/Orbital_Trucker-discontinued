@@ -29,7 +29,7 @@ public class OrbitalTrucker extends Game
     {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        camera = new OrthographicCamera(512, 512);
+        camera = new OrthographicCamera(160, 144);
         camera.position.x = 80;
         camera.position.y = 72;
         // camera.setToOrtho(false, 160, 144);
