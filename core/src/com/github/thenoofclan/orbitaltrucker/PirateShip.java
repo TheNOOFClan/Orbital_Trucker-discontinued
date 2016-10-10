@@ -11,7 +11,7 @@ public class PirateShip extends Ship
 
     public PirateShip(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float aggro, float range, float closest)
     {
-        super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate, 0);
+        //super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate, 0);
         this.aggro = aggro;
         this.range = range;
         this.closest = closest;

@@ -48,13 +48,11 @@ public class GameScreen implements Screen
         battleMusic.setLooping(true);
         rng = new Random();
 
-<<<<<<< HEAD
         Fuel tmpF = new Fuel(10);
         Wepon tmpW = new Wepon(0);
         Raws tmpR = new Raws(10);
         Object[] inv = {tmpF, tmpW, tmpR};
-        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1, inv);
-=======
+        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1, 10, inv);
         pirateT = new Texture(Gdx.files.internal("pirate.png"));
         pirateT45 = new Texture(Gdx.files.internal("pirate45.png"));
         // PirateShip pirate1 = new PirateShip(pirateT, pirateT45, 16, 16, 256,
@@ -63,9 +61,6 @@ public class GameScreen implements Screen
         // 0, 180, 10, 5, 2, 1, 156, 128, 32);
         // PirateShip pirate3 = new PirateShip(pirateT, pirateT45, 16, 16, 0,
         // 256, 270, 10, 5, 2, 1, 156, 128, 32);
-
-        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 0.25f, 10);
->>>>>>> origin/libGDX
         Star star = new Star(new Texture(Gdx.files.internal("star.png")), 96, 96);
         sys = new StarSystem(256, 256, star);
         sys.player = truck;

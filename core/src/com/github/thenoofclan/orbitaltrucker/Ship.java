@@ -39,12 +39,8 @@ public class Ship
 
     public int hp;
 
-<<<<<<< HEAD
     public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout,
-                float maxVelocity, float maxAccel, float brakeRate, Object[] inventory)
-=======
-    public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float maxWarp)
->>>>>>> origin/libGDX
+                float maxVelocity, float maxAccel, float brakeRate, float maxWarp, Object[] inventory)
     {
         this.texture = texture;
         this.texture45 = texture45;

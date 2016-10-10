@@ -11,15 +11,9 @@ public class Player extends Ship
     public boolean nearObject = false;
     public boolean edge = false;
 
-<<<<<<< HEAD
-    public Player(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, Object[] inventory)
+    public Player(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float maxWarp, Object[] inventory)
     {
-        super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate, inventory);
-=======
-    public Player(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float maxWarp)
-    {
-        super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate, maxWarp);
->>>>>>> origin/libGDX
+        super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate, maxWarp, inventory);
     }
 
     @Override
