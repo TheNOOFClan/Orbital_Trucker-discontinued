@@ -20,7 +20,7 @@ public class MainMenuScreen implements Screen
     {
         game = gam;
 
-        instruct = new Text(80 - 32, 16, "PRESS Z", OrbitalTrucker.GREEN);
+        instruct = new Text(7, 16, "PRESS THE ANY KEY!", OrbitalTrucker.GREEN);
 
         mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Song1.mp3"));
         mainMusic.setLooping(true);
@@ -45,7 +45,7 @@ public class MainMenuScreen implements Screen
         instruct.render(game.batch);
         game.batch.end();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Z))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
         {
             game.setScreen(new GameScreen(game));
             dispose();

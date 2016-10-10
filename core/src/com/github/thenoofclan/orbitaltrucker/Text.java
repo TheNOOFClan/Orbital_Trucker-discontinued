@@ -55,5 +55,6 @@ public class Text
         textures.put(':', new Texture(Gdx.files.internal(fontDir + "colon" + ".png")));
         textures.put('.', new Texture(Gdx.files.internal(fontDir + "period" + ".png")));
         textures.put('-', new Texture(Gdx.files.internal(fontDir + "dash" + ".png")));
+        textures.put('!', new Texture(Gdx.files.internal(fontDir + "exclamation" + ".png")));
     }
 }

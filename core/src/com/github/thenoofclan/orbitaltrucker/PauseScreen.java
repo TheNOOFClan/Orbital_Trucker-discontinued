@@ -12,14 +12,35 @@ public class PauseScreen implements Screen
 	Sound pauseMusic;
 	Sound resumeSound;
 	Text pauseText;
+	Object[] inventory;
+	String[] invText;
 
-	public PauseScreen(final OrbitalTrucker game)
+
+	public PauseScreen(final OrbitalTrucker game, Object[] inventory)
 	{
 		this.game = game;
+		this.inventory = inventory;
 
 		pauseMusic = Gdx.audio.newSound(Gdx.files.internal("Pause.wav"));
 		resumeSound = Gdx.audio.newSound(Gdx.files.internal("Resume.wav"));
 		pauseText = new Text(0 ,0, "Pause", OrbitalTrucker.GREEN);
+		try
+		{
+			Fuel fuel = ((Fuel) inventory[0]);
+			Wepon wepon = ((Wepon) inventory[1]);
+			Raws raws = ((Raws) inventory[2]);
+
+			String fuelText = String.format("{0}: Amount: {1}, Description: {2}", fuel.name, fuel.amount, fuel.desc);
+			String weponText = String.format("{0}: Amount: {1}, Description: {2}", wepon.name, wepon.amount, wepon.desc);
+			String rawsText = String.format("{0}: Amount: {1}, Description: {2}", raws.name, raws.amount, raws.desc);
+			String[] invText = {"Invantory:", fuelText, weponText, rawsText};
+		}
+		catch (Exception e)
+		{
+
+		}
+
+
 	}
 
 

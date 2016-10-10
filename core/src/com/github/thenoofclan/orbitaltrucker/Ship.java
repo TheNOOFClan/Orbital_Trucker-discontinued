@@ -32,9 +32,12 @@ public class Ship
     public float maxAccel;
     public float brakeRate;
 
+    public Object[] inventory;
+
     public int hp;
 
-    public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate)
+    public Ship(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout,
+                float maxVelocity, float maxAccel, float brakeRate, Object[] inventory)
     {
         this.texture = texture;
         this.texture45 = texture45;
@@ -49,6 +52,7 @@ public class Ship
         this.talk = null;
         this.velocity = new Vector2(0, 0);
         this.acceleration = new Vector2(this.velocity);
+        this.inventory = inventory;
 
         this.maxTurnTimeout = turnTimeout;
         this.turnTimeout = 0;

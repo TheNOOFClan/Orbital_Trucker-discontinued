@@ -20,6 +20,7 @@ public class GameScreen implements Screen
     Music battleMusic;
     Player truck;
     Random rng;
+    PauseScreen pauseScreen;
 
     Music bIntro;
     Music bOutro;
@@ -45,7 +46,11 @@ public class GameScreen implements Screen
         battleMusic.setLooping(true);
         rng = new Random();
 
-        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1);
+        Fuel tmpF = new Fuel(10);
+        Wepon tmpW = new Wepon(0);
+        Raws tmpR = new Raws(10);
+        Object[] inv = {tmpF, tmpW, tmpR};
+        truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1, inv);
         Star star = new Star(new Texture(Gdx.files.internal("star.png")), 96, 96);
         sys = new StarSystem(256, 256, star);
         sys.player = truck;
@@ -94,6 +99,11 @@ public class GameScreen implements Screen
             musicArray[musicNum].play();
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            pause();
+        }
+
         sys.render(game.batch, game.camera);
         // hud.render();
         game.batch.end();
@@ -128,7 +138,7 @@ public class GameScreen implements Screen
     @Override
     public void pause()
     {
-
+        pauseScreen = new PauseScreen(game, truck.inventory);
     }
 
     @Override
