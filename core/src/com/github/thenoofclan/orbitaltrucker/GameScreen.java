@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class GameScreen implements Screen
 {
+    boolean active;
     final OrbitalTrucker game;
     Texture truckT;
     Texture truckT45;
@@ -41,6 +42,7 @@ public class GameScreen implements Screen
 
     public GameScreen(final OrbitalTrucker game)
     {
+        active = true;
         this.game = game;
         truckT = new Texture(Gdx.files.internal("truck0.png"));
         truckT45 = new Texture(Gdx.files.internal("truck45.png"));
@@ -51,7 +53,7 @@ public class GameScreen implements Screen
         Fuel tmpF = new Fuel(10);
         Wepon tmpW = new Wepon(0);
         Raws tmpR = new Raws(10);
-        Object[] inv = {tmpF, tmpW, tmpR};
+        Object[] inv = { tmpF, tmpW, tmpR };
         truck = new Player(truckT, truckT45, 16, 16, 0, 0, 0, 15, 2, 0.5f, 1, 10, inv);
         pirateT = new Texture(Gdx.files.internal("pirate.png"));
         pirateT45 = new Texture(Gdx.files.internal("pirate45.png"));
@@ -62,8 +64,12 @@ public class GameScreen implements Screen
         // PirateShip pirate3 = new PirateShip(pirateT, pirateT45, 16, 16, 0,
         // 256, 270, 10, 5, 2, 1, 156, 128, 32);
         Star star = new Star(new Texture(Gdx.files.internal("star.png")), 96, 96);
-        sys = new StarSystem(256, 256, star);
+        Planet planet = new Planet(new Texture(Gdx.files.internal("planet.png")), 48, 48);
+        Station station = new Station(new Texture(Gdx.files.internal("station.png")), 24, 24);
+        sys = new StarSystem(512, 512, star);
         sys.player = truck;
+        sys.add(planet, 128, 128);
+        sys.add(station, 384, 384);
         // sys.add(pirate1, 256, 256);
         // sys.add(pirate2, 256, 0);
         // sys.add(pirate3, 0, 256);
@@ -102,27 +108,31 @@ public class GameScreen implements Screen
     @Override
     public void render(float delta)
     {
-
-        if (!musicArray[musicNum].isPlaying() && !stopMusic)
+        if (active)
         {
-            musicNum = rng.nextInt(musicArray.length - 1);
-            if (musicNum == 4)
+            if (!musicArray[musicNum].isPlaying() && !stopMusic)
             {
-                stopMusic = true;
+                musicNum = rng.nextInt(musicArray.length - 1);
+                if (musicNum == 4)
+                {
+                    stopMusic = true;
+                }
+                musicArray[musicNum].play();
             }
-            musicArray[musicNum].play();
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+            {
+                pauseScreen = new PauseScreen(game, truck.inventory, this);
+                game.setScreen(pauseScreen);
+                pause();
+            }
+
+            sys.render(game.batch, game.camera);
+            // hud.render();
+            game.batch.end();
+
+            sys.update();
         }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-        {
-            pause();
-        }
-
-        sys.render(game.batch, game.camera);
-        // hud.render();
-        game.batch.end();
-
-        sys.update();
 
         // if (Gdx.input.isKeyPressed(Input.Keys.A))
         // {
@@ -152,13 +162,13 @@ public class GameScreen implements Screen
     @Override
     public void pause()
     {
-        pauseScreen = new PauseScreen(game, truck.inventory);
+        active = false;
     }
 
     @Override
     public void resume()
     {
-
+        active = true;
     }
 
     @Override
@@ -171,6 +181,12 @@ public class GameScreen implements Screen
     public void dispose()
     {
         truckT.dispose();
+        truckT45.dispose();
+        pirateT.dispose();
+        pirateT45.dispose();
+        sys.center.sprite.getTexture().dispose();
+        for (Dockable d : sys.dockables)
+            d.sprite.getTexture().dispose();
         battleMusic.dispose();
         bU2.dispose();
         bU.dispose();

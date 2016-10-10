@@ -37,7 +37,8 @@ public class StarSystem
 
     public void add(Dockable target, int x, int y)
     {
-
+        target.sprite.setCenter(x, y);
+        dockables.add(target);
     }
 
     public void update()
@@ -80,11 +81,11 @@ public class StarSystem
         batch.begin();
 
         center.render(batch);
-        player.render(batch);
         for (Dockable d : dockables)
         {
             d.render(batch);
         }
+        player.render(batch);
         // for (Ship s : ships)
         // {
         // s.render(batch);

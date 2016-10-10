@@ -14,8 +14,13 @@ public class Text
 
     private HashMap<Character, Texture> textures = new HashMap<Character, Texture>();
 
+    public int x;
+    public int y;
+
     public Text(int x, int y, String text, Color color)
     {
+        this.x = x;
+        this.y = y;
         init("font/");
         sprites = new Sprite[text.length()];
         String tmpText = text.toLowerCase();
