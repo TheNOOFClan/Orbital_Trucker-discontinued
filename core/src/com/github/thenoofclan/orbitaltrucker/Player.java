@@ -2,6 +2,7 @@ package com.github.thenoofclan.orbitaltrucker;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -10,10 +11,12 @@ public class Player extends Ship
     public boolean inCombat = false;
     public boolean nearObject = false;
     public boolean edge = false;
+    public GameScreen parent;
 
-    public Player(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float maxWarp, Object[] inventory)
+    public Player(Texture texture, Texture texture45, int width, int height, float x, float y, int rot, int turnTimeout, float maxVelocity, float maxAccel, float brakeRate, float maxWarp, Object[] inventory, GameScreen parent)
     {
         super(texture, texture45, width, height, x, y, rot, turnTimeout, maxVelocity, maxAccel, brakeRate, maxWarp, inventory);
+        this.parent = parent;
     }
 
     @Override
@@ -45,6 +48,27 @@ public class Player extends Ship
         {
             this.velocity.set(maxWarp, 0);
             this.velocity.setAngle(rot);
+        }
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && edge)
+        {
+            if (parent.sys == parent.sys1)
+            {
+                parent.sys = parent.sys2;
+                this.parent.sys.player = this;
+                this.velocity.set(0, 0);
+                this.x = 0;
+                this.y = 512;
+                this.rot = 315;
+            }
+            else
+            {
+                parent.sys = parent.sys1;
+                this.parent.sys.player = this;
+                this.velocity.set(0, 0);
+                this.x = 0;
+                this.y = 0;
+                this.rot = 45;
+            }
         }
 
         super.update();
